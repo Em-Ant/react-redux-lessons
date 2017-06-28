@@ -3,17 +3,18 @@ import React, { Component } from 'react';
 
 class Form extends Component {
 
-  _click () {
-    const nome = this.refs.nome.value
-    const cognome = this.refs.cognome.value
-    this.props.onPassaTest(nome, cognome);
+  _submit(e) {
+    const { nome, cognome } = this.props;
+    e.preventDefault();
+    this.props.onSubmitPadre(nome , cognome);
+    //console.log({nome , cognome});
   }
   render() {
     return (
-      <form>
-        <input type="text" ref="nome" name="nome" id="nome" placeholder="nome"></input>
-        <input type="text" ref="cognome" name="cognome" id="cognome" placeholder="cognome"></input>
-        <input type="button" value="invia" onClick={e => this._click()}></input>
+      <form onSubmit={e => this._submit(e)}>
+        <input type="text" onChange={e => this.props.onChangeN(e.target.value)} value={this.props.nome} name="nome" id="nome" placeholder="nome"></input>
+        <input type="text" onChange={e => this.props.onChangeC(e.target.value)} value={this.props.cognome} name="cognome" id="cognome" placeholder="cognome"></input>
+        <input type="submit" value="invia"></input>
       </form>
     )
   }

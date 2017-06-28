@@ -16,16 +16,23 @@ class App extends Component {
       title,
       nome : "",
       cognome : "",
-      loading: ""
+      loading: "",
+      list: []
     }
   }
+  _svuota(){
+    this.setState({list: []});
+  }
+
   _onSubmit(nome, cognome) {
     this.setState({loading: 'Loading...'})
+    const list = this.state.list
     setTimeout(() => {
+      list.push({nome , cognome})
       this.setState({
-        nome, cognome, loading: ''
+        list , nome : "", cognome : "", loading: ''
       })
-    }, 2000)
+    }, 1000)
   }
   render() {
     return (
@@ -37,9 +44,11 @@ class App extends Component {
           ></Title>
         </div>
         <div className="App-intro">
-          {this.state.loading}
-          <Form onPassaTest={(nome, cognome) => this._onSubmit(nome , cognome)} />
-          <View nome={this.state.nome} cognome={this.state.cognome} />
+          { this.state.loading }
+          <Form onSubmitPadre={this._onSubmit.bind(this)} onChangeN={ nome => this.setState({nome})}
+                onChangeC={ cognome => this.setState({cognome})}
+                nome={this.state.nome} cognome={this.state.cognome} />
+              <View nomiCognomi={this.state.list} onSvuota={this._svuota.bind(this)} />
         </div>
       </div>
     );
