@@ -27,8 +27,7 @@ const App = props => {
       </div>
       */}
       <Form />
-      <div>{props.nome}</div>
-      <div>{props.cognome}</div>
+      <div>{props.out}</div>
       <button type="button" onClick={props.onTitleChange}>
         Cambia Titolo
       </button>
@@ -43,7 +42,8 @@ const AppContainer = connect(
   state => ({
     title: state.title,
     nome : state.nome,
-    cognome : state.cognome
+    cognome : state.cognome,
+    out: state.out
   }),
   dispatch => ({
     onTitleChange() {

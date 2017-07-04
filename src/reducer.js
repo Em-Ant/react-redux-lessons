@@ -13,7 +13,8 @@ function onReset(state, payload) {
     ...state,
     title : "",
     nome : "",
-    cognome: ""
+    cognome: "",
+    out: ''
   };
 }
 function setNomeCognome(state, meta, payload) {
@@ -38,7 +39,10 @@ export default function reducer(state=initState, action) {
 
     case 'TITLE_RESET':
       return onReset(state, action.payload);
-
+    case 'LOADING':
+      return {...state, out: 'loading...'}
+    case 'SUBMIT_SUCCESS':
+        return {...state, out: `${action.payload.nome} ${action.payload.cognome}`}
     default:
       return state;
   }
